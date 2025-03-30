@@ -1,0 +1,46 @@
+# spring.application.name=tic-tac-toe
+server:
+  port: ${SERVER_PORT}
+tic-tac-toe:
+  role: "X" # todo: delete later
+  delay: 5000
+  kafka:
+    first-turn-claim:
+      topic:
+        name: first-turn-claim-topic
+    game-move:
+      topic:
+        name: game-move-topic
+
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME}
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update  # Automatically update schema (use `create` during initial development for clean slate)
+    show-sql: true       # Enable SQL logging for debugging
+    properties:
+      hibernate:
+        physical_naming_strategy: com.scentbird.tictactoe.tictactoe.config.CustomPhysicalNamingStrategy
+  h2:
+    console:
+      enabled: true       # Enable H2 console for testing
+      path: /h2-console   #
+  kafka:
+    consumer:
+      bootstrap-servers: ${SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS}
+      first-turn-claim:
+        group-id: ${FIRST_TURN_SPRING_KAFKA_CONSUMER_GROUP_ID}
+      game-move:
+        group-id: ${GAME_MOVE_SPRING_KAFKA_CONSUMER_GROUP_ID}
+
+    producer:
+      bootstrap-servers: ${SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+

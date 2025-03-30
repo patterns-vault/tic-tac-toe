@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+
+    display: flex; /* Use Flexbox to center content */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 100vh; /* Make the body fill the full height of the viewport */
+}
+
+#game {
+    margin: 0 auto;
+}
+
+#instance-info {
+    margin-bottom: 20px;
+}
+
+#instance-info p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+#role {
+    font-weight: bold;
+    color: #007bff;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 0 auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cell.taken {
+    cursor: not-allowed;
+    color: #555;
+}
+
+/* Add green color to winning cells */
+.cell.winning {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+#status {
+    margin-top: 20px; /* Add spacing between the board and the status text */
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
