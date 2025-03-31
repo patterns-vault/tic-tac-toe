@@ -16,6 +16,7 @@ public class StartGameService {
 
     private final GameRepo gameRepo;
 
+    // game starts after firstTurnClaims get resolved
     public void startGame(String uuid, String firstTurn) {
         Game game = Game.builder()
                 .gameId(UUID.fromString(uuid))

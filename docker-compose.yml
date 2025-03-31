@@ -55,6 +55,7 @@ services:
     environment:
       - SERVER_PORT=8090
       - SPRING_APPLICATION_NAME=instance1
+      - TIC_TAC_TOE_MOVE_DELAY=5000
       - SPRING_KAFKA_CONSUMER_FIRST_TURN_CLAIM_GROUP_ID=first-turn-claim-group-id-1
       - SPRING_KAFKA_CONSUMER_GAME_MOVE_GROUP_ID=game-move-group-id-1
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka-1:9092
@@ -75,6 +76,7 @@ services:
     environment:
       - SERVER_PORT=8091
       - SPRING_APPLICATION_NAME=instance2
+      - TIC_TAC_TOE_MOVE_DELAY=5000
       - SPRING_KAFKA_CONSUMER_FIRST_TURN_CLAIM_GROUP_ID=first-turn-claim-group-id-2
       - SPRING_KAFKA_CONSUMER_GAME_MOVE_GROUP_ID=game-move-group-id-2
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka-1:9092

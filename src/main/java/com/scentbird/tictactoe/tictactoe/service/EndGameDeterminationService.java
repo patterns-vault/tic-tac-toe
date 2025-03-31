@@ -22,15 +22,7 @@ public class EndGameDeterminationService {
 
     public EndGameStatus shouldGameEnd(String boardState) {
 
-        PlayerRole winner = null;
-
-        for (PlayerRole role : PlayerRole.values()) {
-            if (isVictory(boardState, role)) {
-                winner = role;
-                break;
-            }
-        }
-
+        PlayerRole winner = getWinner(boardState);
         boolean isBoardStateFull = isBoardStateFull(boardState);
 
         // if no winner and board is not full -> continue the game
@@ -64,6 +56,17 @@ public class EndGameDeterminationService {
                 winner
         );
         throw new IllegalStateException(errorMessage);
+    }
+
+    private PlayerRole getWinner(String boardState) {
+        PlayerRole winner = null;
+        for (PlayerRole role : PlayerRole.values()) {
+            if (isVictory(boardState, role)) {
+                winner = role;
+                break;
+            }
+        }
+        return winner;
     }
 
     public boolean isVictory(String boardState, PlayerRole playerRole) {

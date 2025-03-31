@@ -1,7 +1,8 @@
 server:
   port: ${SERVER_PORT}
 tic-tac-toe:
-  delay: 5000
+  move:
+    delay: ${TIC_TAC_TOE_MOVE_DELAY}
   kafka:
     first-turn-claim:
       topic:
@@ -17,7 +18,7 @@ spring:
     url: jdbc:postgresql://postgres:5432/tic_tac_toe
     username: user
     password: pass
-    driver-class-name: org.hibernate.dialect.PostgreSQLDialect
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:

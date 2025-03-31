@@ -22,9 +22,9 @@ public class EndGameService {
 
     private final static String DRAW = "draw";
 
-    public void persistEndGame(GameMove victoriousMove, EndGameStatus endGameStatus) {
-        UUID gameId = victoriousMove.getGameId();
-        PlayerRole currentPlayerRole = victoriousMove.getCurrentPlayerRole();
+    public void persistEndGame(GameMove winningMove, EndGameStatus endGameStatus) {
+        UUID gameId = winningMove.getGameId();
+        PlayerRole currentPlayerRole = winningMove.getCurrentPlayerRole();
 
         Game game = gameRepo.findByGameId(gameId)
                 .orElseThrow(() -> new IllegalStateException("No game with gameId" + gameId));

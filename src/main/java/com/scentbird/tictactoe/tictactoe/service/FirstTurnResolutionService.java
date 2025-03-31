@@ -21,7 +21,7 @@ public class FirstTurnResolutionService {
 
     private Map<String, FirstTurnClaimDto> claims = new HashMap<>();
 
-    public void submitClaim(FirstTurnClaimDto firstTurnClaimDto) {
+    public void resolveClaims(FirstTurnClaimDto firstTurnClaimDto) {
         claims.put(firstTurnClaimDto.getInstanceName(), firstTurnClaimDto);
         if (claims.keySet().size() == 2) {
             resolveFirstTurn();
@@ -43,6 +43,9 @@ public class FirstTurnResolutionService {
                 .orElseThrow(() -> new IllegalStateException("First turn resolution failed"));
 
         log.info("firstTurnInstanceName: {}", firstTurnInstanceName);
+
+        // the table should always have just two records - instance1 and instance2 data.
+        // that's why here is a table cleanup
         instanceRoleService.deleteAll();
 
         instanceRoleService.save(

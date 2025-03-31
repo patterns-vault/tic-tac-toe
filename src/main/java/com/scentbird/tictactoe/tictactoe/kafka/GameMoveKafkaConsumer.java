@@ -9,6 +9,7 @@ import com.scentbird.tictactoe.tictactoe.service.GameMoveService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,9 @@ public class GameMoveKafkaConsumer {
     private final GameMoveService gameMoveService;
     private final EndGameDeterminationService endGameDeterminationService;
     private final EndGameService endGameService;
+
+    @Value("${tic-tac-toe.move.delay}")
+    private Integer moveDelay;
 
     @KafkaListener(
             topics = "${tic-tac-toe.kafka.game-move.topic.name}",
@@ -39,12 +43,15 @@ public class GameMoveKafkaConsumer {
         }
     }
 
+    // todo - replace with WebSocket or RSocket in the future
+    // it's actually a hack so that UI can read the last move before the game's status
+    // becomes FINISHED.
     @SneakyThrows
     private void pause() {
-        Thread.sleep(3000);
+        Thread.sleep(moveDelay / 2);
     }
 
-    private static void printGameIsOver(String currentBoardState) {
+    private void printGameIsOver(String currentBoardState) {
         log.info("It's GAME OVER!!! {}", currentBoardState);
     }
 

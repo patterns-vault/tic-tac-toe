@@ -179,13 +179,13 @@ function updateInstanceAndRole(instance, role) {
     updateGameBoard(lastRenderedBoard);
 }
 // Polling logic to fetch instance and role from the backend every 1 second
-setInterval(fetchInstanceRole, 1000);
+setInterval(fetchInstanceRole, 500);
 
 // Initial fetch of the instance and role
 fetchInstanceRole();
 
 // Polling logic to fetch and render the game state every 1 second
-const pollingInterval = setInterval(fetchAndRenderGameState, 1000);
+const pollingInterval = setInterval(fetchAndRenderGameState, 500);
 
 // Initial render of the board
 fetchAndRenderGameState();

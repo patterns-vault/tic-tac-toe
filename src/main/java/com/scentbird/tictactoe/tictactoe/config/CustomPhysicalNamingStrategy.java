@@ -20,41 +20,38 @@ public class CustomPhysicalNamingStrategy implements PhysicalNamingStrategy {
     private final DataSource dataSource;
 
     @Value("${spring.application.name}")
-    private String schemaName;
+    private String instanceName; // DB schema name for every instance is the same as instance name
 
     @Override
     public Identifier toPhysicalSchemaName(Identifier name, JdbcEnvironment context) {
-        // Always return the custom schema name instead of the default one
-        return Identifier.toIdentifier(schemaName);
+        return Identifier.toIdentifier(instanceName);
     }
 
     @Override
     public Identifier toPhysicalTableName(Identifier name, JdbcEnvironment context) {
-        // Optionally customize the table name (if needed)
-        return name; // Default behavior for table names
+        return name;
     }
 
     @Override
     public Identifier toPhysicalCatalogName(Identifier name, JdbcEnvironment context) {
-        return name; // Default catalog behavior
+        return name;
     }
 
     @Override
     public Identifier toPhysicalSequenceName(Identifier name, JdbcEnvironment context) {
-        return name; // Default sequence behavior
+        return name;
     }
 
     @Override
     public Identifier toPhysicalColumnName(Identifier name, JdbcEnvironment context) {
-        return name; // Default column behavior
+        return name;
     }
 
     @PostConstruct
     @SneakyThrows
     public void initSchema() {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = String.format("CREATE SCHEMA IF NOT EXISTS %s", schemaName);
-
+            String sql = String.format("CREATE SCHEMA IF NOT EXISTS %s", instanceName);
             Statement statement = connection.createStatement();
             statement.execute(sql);
         }

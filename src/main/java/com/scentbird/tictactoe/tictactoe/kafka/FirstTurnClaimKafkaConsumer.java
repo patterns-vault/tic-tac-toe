@@ -21,6 +21,6 @@ public class FirstTurnClaimKafkaConsumer {
     )
     public void consume(FirstTurnClaimDto firstTurnClaimDto) {
         log.info("Consumed FirstTurnClaimDto: {}", firstTurnClaimDto);
-        firstTurnResolutionService.submitClaim(firstTurnClaimDto);
+        firstTurnResolutionService.resolveClaims(firstTurnClaimDto);
     }
 }
