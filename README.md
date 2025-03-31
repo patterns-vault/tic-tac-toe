@@ -1,5 +1,10 @@
 
 
+Here is a little demo 
+
+![me](https://github.com/patterns-vault/tic-tac-toe/blob/master/gif_demo.gif)
+
+
 To run the first instance, use: 
 
 ```shell
