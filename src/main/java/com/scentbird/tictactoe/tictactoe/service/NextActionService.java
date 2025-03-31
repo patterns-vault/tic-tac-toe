@@ -1,5 +1,6 @@
 package com.scentbird.tictactoe.tictactoe.service;
 
+import com.scentbird.tictactoe.tictactoe.dto.NextActionDataContext;
 import com.scentbird.tictactoe.tictactoe.kafka.GameMoveKafkaProducer;
 import com.scentbird.tictactoe.tictactoe.model.Game;
 import com.scentbird.tictactoe.tictactoe.model.GameMove;
