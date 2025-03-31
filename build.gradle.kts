@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.scentbird.tictactoe"
-version = "0.0.3-SNAPSHOT"
+version = "0.0.4"
 
 java {
     toolchain {
@@ -28,8 +28,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.kafka:spring-kafka")
-    // https://mvnrepository.com/artifact/com.h2database/h2
-    implementation("com.h2database:h2:2.3.232")
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation("org.postgresql:postgresql")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
