@@ -112,7 +112,10 @@ function updateGameBoard(board) {
             cell.style.color = ''; // Reset color for other figures
         }
 
-        cell.classList.remove('winning'); // Remove any previous winning highlight
+        // Only remove 'winning' class if the game is not completed
+        if (!isGameCompleted) {
+            cell.classList.remove('winning');
+        }
     });
 }
 
@@ -179,13 +182,13 @@ function updateInstanceAndRole(instance, role) {
     updateGameBoard(lastRenderedBoard);
 }
 // Polling logic to fetch instance and role from the backend every 1 second
-setInterval(fetchInstanceRole, 500);
+setInterval(fetchInstanceRole, 1000);
 
 // Initial fetch of the instance and role
 fetchInstanceRole();
 
 // Polling logic to fetch and render the game state every 1 second
-const pollingInterval = setInterval(fetchAndRenderGameState, 500);
+const pollingInterval = setInterval(fetchAndRenderGameState, 1000);
 
 // Initial render of the board
 fetchAndRenderGameState();
