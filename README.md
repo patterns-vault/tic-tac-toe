@@ -89,6 +89,9 @@ and
 
 Here is a list of possible future improvements:
 
-1. Replace REST API one-a-second requests which JavaScript UI with WebSocket or RSocket communication.
+1. Replace REST API - JavaScript UI once-a-second requests with WebSocket or RSocket communication.
+2. Enforce strict separation of application layers: - persistence layer, Kafka communication layer, service logic layer. Currently, JPA entity objects are sent and received via Kafka without conversion - they are reused. Introducing dedicated Kafka outbound and inbound request models would improve decoupling and maintainability.
+3. For performance optimization, introduce an in-memory Caffeine cache to store instance role data, which is currently fetched from the database on every execution of the scheduled job.
+4. Add logic to prevent setting an instance name that is already in use, ensuring that each instance has a unique name. Currently, there is no mechanism in place to prevent two instances from having the same name, which could lead to conflicts and issues with the execution of game logic.
 
 # Functional Requirements Fulfillment Summary 
