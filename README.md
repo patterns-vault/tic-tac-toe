@@ -18,6 +18,7 @@ The application is designed to be run as a two-node system, with each node repre
     Java 
     Postgres
     Kafka
+    testcontainers
     JavaScript
 
 
@@ -90,8 +91,15 @@ and
 Here is a list of possible future improvements:
 
 1. Replace REST API - JavaScript UI once-a-second requests with WebSocket or RSocket communication.
-2. Enforce strict separation of application layers: - persistence layer, Kafka communication layer, service logic layer. Currently, JPA entity objects are sent and received via Kafka without conversion - they are reused. Introducing dedicated Kafka outbound and inbound request models would improve decoupling and maintainability.
+2. Enforce strict separation of application layers - persistence layer, Kafka communication layer, service logic layer. Currently, JPA entity objects are sent and received via Kafka without conversion - they are reused. Introducing dedicated Kafka outbound and inbound request models would improve decoupling and maintainability.
 3. For performance optimization, introduce an in-memory Caffeine cache to store instance role data, which is currently fetched from the database on every execution of the scheduled job.
 4. Add logic to prevent setting an instance name that is already in use, ensuring that each instance has a unique name. Currently, there is no mechanism in place to prevent two instances from having the same name, which could lead to conflicts and issues with the execution of game logic.
 
-# Functional Requirements Fulfillment Summary 
+# Functional Requirements Fulfillment Summary
+
+
+|     | Requirement                                                                                                        | Status |                                                                                                          |
+| --- | ------------------------------------------------------------------------------------------------------------------ | ------ | -------------------------------------------------------------------------------------------------------- |
+| 1   | The application must be developed in the JVM language.                                                             | ✅      | The application is developed in Java                                                                     |
+| 2   | Any technology of the developer's choice can be used.                                                              | ✅      | Here is a stack: Spring Boot, Java, Postgres, Kafka, testcontainers, JavaScript                          |
+| 3   | The application should be developed with best practices for writing code: formatting, testing, comments as needed. | ✅      | The code has a substantial test coverage. All the ambiguous episodes in code are clarified with comments |
