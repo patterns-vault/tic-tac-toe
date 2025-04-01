@@ -8,7 +8,20 @@ The application is designed to be run as a two-node system, with each node repre
 ## How It Works
 
 1. **Dual-Instance Architecture**: The same application runs as two separate instances, differentiated by a different sets of environment variables. Two nodes must be started at the same time.
-2. **Initial Handshake**: Nodes exchange initial messages (called `firstTurnClaims` in the context of the application) through a `first-turn-claim-topic` Kafka topic to establish which node takes the first turn.
+2. **Initial Handshake**: Nodes exchange initial messages (called `firstTurnClaim` in the context of the application) through a `first-turn-claim-topic` Kafka topic to establish which node takes the first turn.
+   UUID-Based Comparison Mechanism is used. This comparison mechanism processes UUIDs submitted by two instances in  `firstTurnClaim` to derive a comparable numeric value. The steps are as follows:
+    1. **UUID Conversion**:  
+       Each UUID is converted into a numeric value using the `getMostSignificantBits()` function.
+    2. **Absolute Value Calculation**:  
+       If the resulting number is negative, its absolute value is taken to ensure consistency.
+    3. **Irrational Number Transformation**:  
+       The square root of the absolute value is computed to introduce irrationality.
+    4. **Fractional Part Extraction**:  
+       The fractional part of the square root (i.e., the digits after the decimal point) is extracted.
+    5. **Comparison**:  
+       The extracted fractional parts from both UUIDs are compared to determine the final result.
+
+   This approach ensures a non-trivial transformation of the UUID into a comparison-friendly format while maintaining a degree of randomness due to the irrationality introduced by the square root operation.
 3. **Game Progression**: Nodes alternate turns by exchanging messages through a `game-move-topic` Kafka topic, maintaining the game state in a `game_move` Postgres database table.
 4. After the game is finished (either by the virtue of the fact that one instance wins or that it's a draw - no more move on a board left) the cycle is repeated.
 
